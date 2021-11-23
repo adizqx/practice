@@ -53,9 +53,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity2::class.java)
                 intent.putExtra("text", "$element : $index")
                 startActivity(intent)
-            }
-           else Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show()
-            break
+            } else if (text.isNullOrEmpty()) Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show()
             }
         }
     }
