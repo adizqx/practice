@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var editText: EditText
     lateinit var button: Button
     lateinit var button2: Button
-    val array = arrayListOf("A","B","C","D","E")
+    val array = arrayListOf("A", "B", "C", "D", "E")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,41 +20,53 @@ class MainActivity : AppCompatActivity() {
         button = findViewById(R.id.btn1)
         button2 = findViewById(R.id.btn2)
 
-        button.setOnClickListener{
+        button.setOnClickListener {
             val text = editText.text.toString()
             val result = getValueUsingWhile(text)
-            if (result == null) Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show()
+            if (result.isNullOrEmpty()) Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show()
             else {
-            val intent = Intent(this, MainActivity2::class.java)
-            intent.putExtra("key",result)
-            startActivity(intent)
-            }
-        }
-
-        button2.setOnClickListener{
-            val text = editText.text.toString()
-            getValueUsingFor(text)
-        }
-
-    }
-    fun getValueUsingWhile(text: String):String? {
-        var index = 0
-        while (index < array.size) {
-            if (text == array[index]) {
-                return "$text : $index"
-            }
-            ++index
-        }
-        return null
-    }
-    fun getValueUsingFor (text: String){
-        for ((index,element) in array.withIndex()) {
-            if (text == element) {
                 val intent = Intent(this, MainActivity2::class.java)
-                intent.putExtra("text", "$element : $index")
+                intent.putExtra("key", result)
                 startActivity(intent)
-            } else if (text.isNullOrEmpty()) Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show()
             }
         }
+
+        button2.setOnClickListener {
+            val text = editText.text.toString()
+            var res2 = getValueUsingFor(text)
+            if (text.isNullOrEmpty()) Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show()
+//            for ((index, element) in array.withIndex()) {
+//                if (text != element) {
+//                    Toast.makeText(this, "ne naideno", Toast.LENGTH_SHORT).show()
+//                    break
+//                }
+//            }
+
+        }
     }
+            fun getValueUsingWhile(text: String): String? {
+                var index = 0
+                while (index < array.size) {
+                    if (text == array[index]) {
+                        return "$text : $index"
+                    }
+                    ++index
+                }
+                return null
+            }
+
+            fun getValueUsingFor(text: String) {
+                for ((index, element) in array.withIndex()) {
+                    if (text == element) {
+                        val intent = Intent(this, MainActivity2::class.java)
+                        intent.putExtra("text", "$element : $index")
+                        startActivity(intent)
+                    }
+
+                }
+
+            }
+
+    }
+
 
